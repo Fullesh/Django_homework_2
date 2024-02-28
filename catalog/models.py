@@ -1,10 +1,12 @@
 from django.db import models
 
+NULLABLE = {'blank': True, 'null': True}
+
 
 class Category(models.Model):
 
     name = models.CharField(max_length=100, verbose_name='Наименование')
-    description = models.CharField(max_length=250, verbose_name='Описание')
+    description = models.CharField(max_length=250, verbose_name='Описание', **NULLABLE)
 
     def __str__(self):
         return f'{self.name}: ({self.description})'
@@ -17,8 +19,8 @@ class Category(models.Model):
 class Product(models.Model):
 
     name = models.CharField(max_length=100, verbose_name='Наименование')
-    description = models.CharField(max_length=250, verbose_name='Описание')
-    image = models.ImageField(upload_to='product_images/', verbose_name='Изображение')
+    description = models.CharField(max_length=250, verbose_name='Описание', **NULLABLE)
+    image = models.ImageField(upload_to='product_images/', verbose_name='Изображение', **NULLABLE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price_to_buy = models.IntegerField(verbose_name='Цена за покупку')
     created_at = models.DateTimeField(verbose_name='Дата создания')
