@@ -1,0 +1,80 @@
+[
+{
+  "model": "catalog.product",
+  "pk": 1,
+  "fields": {
+    "name": "Ноутбук",
+    "description": "128 GB SSD, 8 GB RAM, OS WIN 11",
+    "image": "Null",
+    "category": 1,
+    "price_to_buy": 50000,
+    "created_at": "2024-02-27T10:00:00Z",
+    "updated_at": "2024-02-27T10:00:00Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 2,
+  "fields": {
+    "name": "Смартфон ReadMeDotMD",
+    "description": "128 GB ROM, 8 GB RAM, OS Android 20",
+    "image": "Null",
+    "category": 3,
+    "price_to_buy": 50000,
+    "created_at": "2024-02-27T10:00:00Z",
+    "updated_at": "2024-02-27T10:00:00Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 3,
+  "fields": {
+    "name": "Смартфон iPhone 22",
+    "description": "1 TB ROM 8 GB RAM OS iOS 17.4",
+    "image": "Null",
+    "category": 3,
+    "price_to_buy": 150000,
+    "created_at": "2024-02-27T10:00:00Z",
+    "updated_at": "2024-02-27T10:00:00Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 4,
+  "fields": {
+    "name": "Мышь компьютерная LogiBogi C700",
+    "description": "Цвет - чёрный, DPI - 400, Беспроводная",
+    "image": "Null",
+    "category": 2,
+    "price_to_buy": 300,
+    "created_at": "2024-02-27T10:00:00Z",
+    "updated_at": "2024-02-27T10:00:00Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 5,
+  "fields": {
+    "name": "Клавиатура RazoR BlackWindows 2500",
+    "description": "Цвет - мультиколор, Подсветка - RGB, Тип - механика",
+    "image": "Null",
+    "category": 2,
+    "price_to_buy": 5000,
+    "created_at": "2024-02-27T10:00:00Z",
+    "updated_at": "2024-02-27T10:00:00Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 6,
+  "fields": {
+    "name": "Коврик для мыши Defendres",
+    "description": "Цвет - чёрный, Габариты - ШxД 10x25",
+    "image": "Null",
+    "category": 2,
+    "price_to_buy": 777,
+    "created_at": "2024-02-27T10:00:00Z",
+    "updated_at": "2024-02-27T10:00:00Z"
+  }
+}
+]
