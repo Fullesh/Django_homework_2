@@ -15,3 +15,7 @@ def contacts(request):
               f"Subject_phone: {phone} \n"
               f"Subject_message: {message}")
     return render(request, 'catalog/contacts.html')
+
+
+def products(request):
+    return render(request, 'catalog/products.html')
