@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='product',
+            model_name='product_images',
             name='manufactured_at',
             field=models.DateTimeField(default='2024-02-26 10:00:00', verbose_name='Дата производства продукта'),
         ),

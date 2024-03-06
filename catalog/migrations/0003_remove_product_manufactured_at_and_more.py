@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(
-            model_name='product',
+            model_name='product_images',
             name='manufactured_at',
         ),
         migrations.AlterField(
@@ -20,12 +20,12 @@ class Migration(migrations.Migration):
             field=models.CharField(blank=True, max_length=250, null=True, verbose_name='Описание'),
         ),
         migrations.AlterField(
-            model_name='product',
+            model_name='product_images',
             name='description',
             field=models.CharField(blank=True, max_length=250, null=True, verbose_name='Описание'),
         ),
         migrations.AlterField(
-            model_name='product',
+            model_name='product_images',
             name='image',
             field=models.ImageField(blank=True, null=True, upload_to='product_images/', verbose_name='Изображение'),
         ),
