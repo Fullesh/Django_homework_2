@@ -1,4 +1,5 @@
 {% load static %}
+{% load images_tag %}
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="{% static 'js/color-modes.js' %}"></script>
@@ -19,12 +20,12 @@
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Favicons -->
-<link rel="apple-touch-icon" href="{%static 'images/favicons/apple-touch-icon.png' %}" sizes="180x180">
-<link rel="icon" href="{% static 'images/favicons/favicon-32x32.png' %}" sizes="32x32" type="image/png">
-<link rel="icon" href="{% static 'images/favicons/favicon-16x16.png' %}" sizes="16x16" type="image/png">
-<link rel="manifest" href="{% static 'json/favicons/manifest.json' %}">
-<link rel="mask-icon" href="{% static 'images/favicons/safari-pinned-tab.svg' %}" color="#712cf9">
-<link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+<link rel="apple-touch-icon" href="{%static 'images/apple-touch-icon.png' %}" sizes="180x180">
+<link rel="icon" href="{% static 'images/favicon-32x32.png' %}" sizes="32x32" type="image/png">
+<link rel="icon" href="{% static 'images/favicon-16x16.png' %}" sizes="16x16" type="image/png">
+<link rel="manifest" href="{% static 'json/manifest.json' %}">
+<link rel="mask-icon" href="{% static 'images/safari-pinned-tab.svg' %}" color="#712cf9">
+<link rel="icon" href="{% static 'images/favicon.ico' %}">
 <meta name="theme-color" content="#712cf9">
 
 
@@ -109,7 +110,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="pricing.css" rel="stylesheet">
+    <link href="{% static 'css/pricing.css' %}" rel="stylesheet">
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -198,7 +199,7 @@
             <h4 class="my-0 fw-normal">{{object.name}}</h4>
           </div>
           <div class="card-body">
-            <img src="..." class="card-img-top" alt="...">
+            <img class="card-img-top" src="{% images_tag object.image %}" alt="{{object.name}}">
             <h1 class="card-title pricing-card-title">{{object.price_to_buy}} ₽</h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>{{object.description}}</li>
