@@ -11,12 +11,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='product',
+            model_name='product_images',
             name='created_at',
             field=models.DateTimeField(auto_now_add=True, verbose_name='Дата создания'),
         ),
         migrations.AlterField(
-            model_name='product',
+            model_name='product_images',
             name='updated_at',
             field=models.DateTimeField(auto_now_add=True, verbose_name='Дата последнего изменения'),
         ),
