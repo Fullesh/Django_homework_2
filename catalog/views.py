@@ -1,13 +1,19 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
 from catalog.models import Product, Category
 
 
-def index(request):
-    context = {
-        'objects_list': Product.objects.all()
-    }
-    return render(request, 'catalog/home.html', context)
+class indexListView(ListView):
+    model = Product
+    template_name = 'catalog/home.html'
+    context_object_name = 'objects_list'
+
+# def index(request):
+#     context = {
+#         'objects_list': Product.objects.all()
+#     }
+#     return render(request, 'catalog/home.html', context)
 
 
 def contacts(request):
@@ -22,11 +28,17 @@ def contacts(request):
     return render(request, 'catalog/contacts.html')
 
 
-def one_product(request, pk):
-    context = {
-        'object': Product.objects.get(pk=pk),
-    }
-    return render(request, 'catalog/product.html', context)
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product.html'
+    context_object_name = 'objects_list'
+
+
+# def one_product(request, pk):
+#     context = {
+#         'object': Product.objects.get(pk=pk),
+#     }
+#     return render(request, 'catalog/product.html', context)
 
 
 def add_product(request):
@@ -39,12 +51,6 @@ def add_product(request):
         price_to_buy = request.POST.get('price_to_buy')
         product_image = request.POST.get('product_image')
         category = request.POST.get('category')
-        print(f'NEW PRODUCT WAS ADDED! INFO BELOW: \n'
-              f'NAME: {product_name} \n'
-              f'DESC: {product_description} \n'
-              f'PRICE: {price_to_buy} \n'
-              f'CATEGORY: {category} \n'
-              f'IMG: {product_image}')
         info = {
             'name': product_name,
             'description': product_description,
