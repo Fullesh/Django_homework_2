@@ -11,7 +11,7 @@
                     <h4 class="my-0 font-weight-normal">Панель добавления товара</h4>
                 </div>
                 <div class="card-body text-center">
-                    <form method="post" action="" class="form-floating">
+                    <form method="post" action="" enctype="multipart/form-data" class="form-floating" >
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="name">Наименование товара</label>
