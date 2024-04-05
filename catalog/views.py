@@ -6,7 +6,7 @@ from catalog.models import Product, Category
 
 class indexListView(ListView):
     model = Product
-    template_name = 'catalog/blog_list.html'
+    template_name = 'catalog/home.html'
     context_object_name = 'objects_list'
 
 
