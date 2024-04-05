@@ -5,17 +5,12 @@
 
 
 {% block content %}
-<div class="card mx-auto" style="width: 18rem;">
-  <img src="{% images_tag object.image %}" class="card-img-top" alt={{object.name}}>
-  <div class="card-body">
-    <form method="post" enctype="multipart/form-data"></form>
-    <h5 class="card-title">{{object.title}}</h5>
-<!--    <p class="card-text">{{object.description}}</p>-->
-<!--    <p class="card-text">Категория: {{object.category}}</p>-->
-<!--    <p class="card-text">Создан: {{object.created_at}}</p>-->
-<!--    <p class="card-text">Изменён: {{object.updated_at}}</p>-->
-<!--    <p class="card-text">Цена: {{object.price_to_buy}}₽</p>-->
-    <a href="#" class="btn btn-primary">TESTTESTEST</a>
-  </div>
+<h1 align="center">{{object.title}}</h1>
+<p>{{object.body}}</p>
+<div align="center">
+  <img src="{% images_tag object.image %}" alt="404 но мы уже чиним..">
 </div>
+<p align="right">
+  Количество просмотров: {{object.views_count}}
+</p>
 {% endblock %}
