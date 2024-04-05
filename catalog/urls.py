@@ -4,7 +4,7 @@ from catalog.views import indexListView, ProductDetailView, contactsPageView, Pr
 
 urlpatterns = [
     path('', indexListView.as_view()),
-    path('contacts/', contactsPageView.as_view(), name='contacts'),
+    path('contacts/', contactsPageView.as_view()),
     path('products/<int:pk>', ProductDetailView.as_view(), name='product_url'),
     path('products/add/', ProductAddView.as_view(), name='add_product')
 ]

@@ -1,0 +1,22 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load images_tag %}
+
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        {% for object in objects_list %}
+        <div class="col-3">
+            <div class="card">
+                <img src="{% images_tag object.image %}" class="card-img-top" alt="404">
+                <div class="card-body">
+                    <h5 class="card-title">{{object.title}}</h5>
+                    <p class="card-text">{{object.body|slice:100}}</p>
+                    <a class="btn btn-lg btn-block btn-outline-primary" href="view/{{object.pk}}" role="button">Прочесть полностью</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
