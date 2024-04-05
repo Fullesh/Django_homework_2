@@ -11,7 +11,7 @@ class BlogRecordCreate(CreateView):
     model = BlogRecord
     template_name = 'blog/blog_form.html'
     fields = ('title', 'body', 'preview', 'is_published')
-    success_url = reverse_lazy('blog:index')
+    success_url = reverse_lazy('blog:list')
 
 
 class BlogIndexView(ListView):
