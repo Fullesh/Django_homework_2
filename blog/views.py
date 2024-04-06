@@ -56,7 +56,7 @@ class BlogRecordDeatilView(DetailView):
     context_object_name = 'objects_list'
 
     def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
+        self.object = super().get_object()
         self.object.views_count += 1
         self.object.save()
         return self.object
