@@ -8,7 +8,9 @@
         {% for object in objects_list %}
         <div class="col-3">
             <div class="card">
-                <img src="{% images_tag object.image %}" class="card-img-top" alt="404">
+                {% if object.preview %}
+                <img src="{% images_tag object.preview %}" class="card-img-top" alt="404 но мы уже чиним...">
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{object.title}}</h5>
                     <p class="card-text">{{object.body|slice:100}}</p>
