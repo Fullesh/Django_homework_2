@@ -25,4 +25,4 @@ class ProductAddForm(forms.ModelForm):
 class VersionForm(forms.ModelForm):
     class Meta:
         model = Version
-        exclude = ('product', 'version_number', 'name_of_version', 'actual_version_indicator')
+        fields = ('product', 'version_number', 'name_of_version', 'actual_version_indicator')
