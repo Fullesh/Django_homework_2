@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 
 from catalog.forms import ProductAddForm, VersionForm
-from catalog.models import Product, Category, Version
+from catalog.models import Product, Version
 
 
 class indexListView(ListView):
@@ -42,18 +42,18 @@ class ProductAddView(CreateView):
 
 
 class ProductUpdateView(UpdateView):
-    model = Version
+    model = Product
     template_name = 'catalog/product_form.html'
     form_class = VersionForm
     success_url = reverse_lazy('catalog:index')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        VersionFormSet = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+        VersionformSet = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
         if self.request.method == 'POST':
-            context_data['formset'] = VersionFormSet(self.request.POST, self.object)
+            context_data['formset'] = VersionformSet(self.request.POST, self.object)
         else:
-            context_data['formset'] = VersionFormSet(self.object)
+            context_data['formset'] = VersionformSet(self.object)
         return context_data
 
     def form_valid(self, form):
