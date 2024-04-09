@@ -1,6 +1,6 @@
 from django import forms
 
-from catalog.models import Product, Category
+from catalog.models import Product, Version
 
 
 class ProductAddForm(forms.ModelForm):
@@ -20,3 +20,9 @@ class ProductAddForm(forms.ModelForm):
             raise forms.ValidationError('У-пс, название товара в списке запрещённых товаров')
 
         return cleaned_data
+
+
+class VersionForm(forms.ModelForm):
+    class Meta:
+        model = Version
+        exclude = ('product', 'version_number', 'name_of_version', 'actual_version_indicator')
