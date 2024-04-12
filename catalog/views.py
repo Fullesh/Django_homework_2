@@ -44,7 +44,7 @@ class ProductAddView(CreateView):
 class ProductUpdateView(UpdateView):
     model = Product
     template_name = 'catalog/product_form.html'
-    form_class = VersionForm
+    form_class = ProductAddForm
     success_url = reverse_lazy('catalog:index')
 
     def get_context_data(self, **kwargs):
