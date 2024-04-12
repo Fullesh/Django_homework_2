@@ -13,27 +13,7 @@
                 <div class="card-body text-center">
                     <form method="post" action="" enctype="multipart/form-data" class="form-floating" >
                         {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="name">Наименование товара</label>
-                            <input type="text" name="product_name" class="form-control" id="name" placeholder="" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="description">Описание товара</label>
-                            <textarea type="text" name="product_description" class="form-control" id="description" placeholder="(Необязательное поле)"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="price">Цена за товар</label>
-                            <input type="number" name="price_to_buy" class="form-control" id="price" placeholder="" required>
-                        </div>
-                        <select name="category" class="form-select form-select-sb mb-3" aria-label="" required>
-                            <label>Категория товара</label>
-                            {% for object in objects_list %}
-                            <option value="{{object.name}}">{{object.name}}</option>
-                            {% endfor %}
-                        </select>
-                        <div class="input-group mb-3">
-                            <input name="product_image" type="file" class="form-control" id="inputGroupFile01">
-                        </div>
+                        {{ form.as_p }}
                         <button type="submit" class="btn btn-block btn-outline-primary">Отправить</button>
                     </form>
                 </div>

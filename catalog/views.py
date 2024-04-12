@@ -1,7 +1,10 @@
+from django.forms import inlineformset_factory
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 
-from catalog.models import Product, Category
+from catalog.forms import ProductAddForm, VersionForm
+from catalog.models import Product, Version
 
 
 class indexListView(ListView):
@@ -31,28 +34,33 @@ class ProductDetailView(DetailView):
     context_object_name = 'objects_list'
 
 
-class ProductAddView(TemplateView):
+class ProductAddView(CreateView):
+    model = Product
     template_name = 'catalog/add_product.html'
+    form_class = ProductAddForm
+    success_url = reverse_lazy('catalog:index')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    template_name = 'catalog/product_form.html'
+    form_class = ProductAddForm
+    success_url = reverse_lazy('catalog:index')
 
     def get_context_data(self, **kwargs):
-        context = {
-            'objects_list': Category.objects.all()
-        }
-        return context
+        context_data = super().get_context_data(**kwargs)
+        Versionformset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = Versionformset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = Versionformset(instance=self.object)
+        return context_data
 
-    def post(self, request, *args, **kwargs):
-        if request.method == 'POST':
-            product_name = request.POST.get('product_name')
-            product_description = request.POST.get('product_description')
-            price_to_buy = request.POST.get('price_to_buy')
-            product_image = request.POST.get('product_image')
-            category = request.POST.get('category')
-            info = {
-                'name': product_name,
-                'description': product_description,
-                'image': product_image,
-                'category': Category.objects.get(name=category),
-                'price_to_buy': price_to_buy
-            }
-            Product.objects.get_or_create(**info)
-        return render(request, self.template_name, self.get_context_data(**kwargs))
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        self.object = form.save()
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+        
+        return super().form_valid(form)
