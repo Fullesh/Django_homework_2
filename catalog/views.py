@@ -1,7 +1,7 @@
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
 from catalog.forms import ProductAddForm, VersionForm
 from catalog.models import Product, Version
@@ -64,3 +64,9 @@ class ProductUpdateView(UpdateView):
             formset.save()
         
         return super().form_valid(form)
+
+
+class ProudctDeleteView(DeleteView):
+    model = Product
+    template_name = 'catalog/product_confirm_delete.html'
+    success_url = reverse_lazy('catalog:index')
