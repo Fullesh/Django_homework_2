@@ -7,20 +7,24 @@
         <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
-                    <a class='py-2 link-body-emphasis text-decoration-none' href="products/{{object.pk}}">
                     <h4 class="my-0 font-weight-normal">{{object.name}}</h4>
-                    </a>
                 </div>
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title">{{object.price_to_buy}} ₽</h1>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>- {{object.description|slice:100}}</li>
+                        {% for version in object.version_set.all %}
+                        {% if version.actual_version_indicator == True %}
+                        <li>Версия: {{version.version_number}}</li>
+                        <li>Название версии: {{version.name_of_version}}</li>
+                        {% endif %}
+                        {% endfor %}
                     </ul>
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
+                    <a class="btn btn-lg btn-block btn-outline-primary" href="products/{{object.pk}}" role="button">Подробнее</a>
                 </div>
             </div>
         </div>
-    {% endfor %}
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
