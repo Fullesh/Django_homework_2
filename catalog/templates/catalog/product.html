@@ -6,7 +6,7 @@
 {% block content %}
 <div class="card mx-auto" style="width: 18rem;">
     <img src="{% images_tag object.image %}" class="card-img-top" alt={{object.name}}>
-    <div class="card-body">
+    <div class="card-body mx-20">
         <form method="post" enctype="multipart/form-data"></form>
         <h5 class="card-title">{{object.name}}</h5>
         <p class="card-text">{{object.description}}</p>
@@ -16,6 +16,7 @@
         <p class="card-text">Цена: {{object.price_to_buy}}₽</p>
         <a href="#" class="btn btn-primary">Купить</a>
         <a href="edit/{{object.pk}}" class="btn btn-primary">Редактировать</a>
+        <a href="delete/{{object.pk}}" class="btn btn-danger position-center">Удалить</a>
     </div>
 </div>
 {% endblock %}
