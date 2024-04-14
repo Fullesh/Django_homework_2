@@ -2,6 +2,8 @@ from django import forms
 
 from catalog.models import Product, Version
 
+WORDS_BLACKLIST = ('казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно',
+                   'обман', 'полиция', 'радар')
 
 class StyleFormMixin:
     def __init__(self, *args, **kwargs):
@@ -21,8 +23,16 @@ class ProductAddForm(StyleFormMixin, forms.ModelForm):
     def clean_name(self):
         cleaned_data = self.cleaned_data.get('name')
 
-        if cleaned_data in ('казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар'):
+        if cleaned_data in WORDS_BLACKLIST:
             raise forms.ValidationError('У-пс, название товара в списке запрещённых товаров')
+
+        return cleaned_data
+
+    def clean_description(self):
+        cleaned_data = self.cleaned_data.get('description')
+
+        if cleaned_data in WORDS_BLACKLIST:
+            raise forms.ValidationError('У-пс, описание товара содержит запрещённые слова')
 
         return cleaned_data
 
