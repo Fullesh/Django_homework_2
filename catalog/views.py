@@ -43,7 +43,7 @@ class ProductAddView(CreateView, LoginRequiredMixin):
     success_url = reverse_lazy('catalog:index')
 
 
-class ProductUpdateView(UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
+class ProductUpdateView(UpdateView, LoginRequiredMixin):
     model = Product
     template_name = 'catalog/product_form.html'
     form_class = ProductAddForm
