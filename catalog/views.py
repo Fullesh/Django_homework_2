@@ -80,7 +80,7 @@ class ProductUpdateView(UpdateView, LoginRequiredMixin):
         return super().form_valid(form)
 
 
-class ProudctDeleteView(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
+class ProudctDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
     template_name = 'catalog/product_confirm_delete.html'
     success_url = reverse_lazy('catalog:index')
