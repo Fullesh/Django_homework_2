@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -7,7 +8,7 @@ from catalog.forms import ProductAddForm, VersionForm
 from catalog.models import Product, Version
 
 
-class indexListView(ListView):
+class indexListView(ListView, LoginRequiredMixin):
     model = Product
     template_name = 'catalog/home.html'
     context_object_name = 'objects_list'
@@ -28,24 +29,42 @@ class contactsPageView(TemplateView):
         return render(request, self.template_name)
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(DetailView, LoginRequiredMixin):
     model = Product
     template_name = 'catalog/product.html'
     context_object_name = 'objects_list'
 
 
-class ProductAddView(CreateView):
+class ProductAddView(CreateView, LoginRequiredMixin):
     model = Product
     template_name = 'catalog/add_product.html'
     form_class = ProductAddForm
     success_url = reverse_lazy('catalog:index')
+    
+    def form_valid(self, form):
+        product = form.save()
+        user = self.request.user
+        product.owner = user
+        product.save()
+        return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(UpdateView, LoginRequiredMixin):
     model = Product
     template_name = 'catalog/product_form.html'
     form_class = ProductAddForm
     success_url = reverse_lazy('catalog:index')
+    # perms = ('catalog.edit_publication', 'catalog.edit_description', 'catalog.edit_categories')
+
+    # def get_form_class(self):
+    #     if self.request.user.is_staff and self.request.user.has_perms(perm_list=self.perms) \
+    #             and not self.request.user.is_superuser:
+    #         return ProductAddForm
+    #     else:
+    #         if self.request.user != self.get_object().owner:
+    #             raise PermissionDenied
+    #         else:
+    #             return ProductAddForm
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -59,6 +78,7 @@ class ProductUpdateView(UpdateView):
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
         self.object = form.save()
+        self.object.owner = self.request.user
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
@@ -66,7 +86,9 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class ProudctDeleteView(DeleteView):
+class ProudctDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = 'catalog/product_confirm_delete.html'
     success_url = reverse_lazy('catalog:index')
+
+
