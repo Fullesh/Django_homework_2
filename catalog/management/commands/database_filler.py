@@ -10,14 +10,14 @@ class Command(BaseCommand):
 
     @staticmethod
     def json_read_categories():
-        with open('catalog/JSON_Exports/category_data.json', 'r', encoding='UTF-8') as category_file:
+        with open('catalog/fixtures/category_data.json', 'r', encoding='UTF-8') as category_file:
             data = json.load(category_file)
         return data
     # «десь мы получаем данные из фикстурв с категори€ми
 
     @staticmethod
     def json_read_products():
-        with open('catalog/JSON_Exports/product_data.json', 'r', encoding='UTF-8') as product_file:
+        with open('catalog/fixtures/product_data.json', 'r', encoding='UTF-8') as product_file:
             data = json.load(product_file)
         return data
     # «десь мы получаем данные из фикстурв с продуктами
