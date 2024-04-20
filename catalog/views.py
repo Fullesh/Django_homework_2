@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 
 from catalog.forms import ProductAddForm, VersionForm
 from catalog.models import Product, Version
+from catalog.services import get_category_from_cache
 
 
 class indexListView(ListView, LoginRequiredMixin):
@@ -33,6 +34,9 @@ class ProductDetailView(DetailView, LoginRequiredMixin):
     model = Product
     template_name = 'catalog/product.html'
     context_object_name = 'objects_list'
+
+    def get_queryset(self):
+        return get_category_from_cache()
 
 
 class ProductAddView(CreateView, LoginRequiredMixin):
