@@ -1,0 +1,16 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="card mx-auto" style="width: 18rem;">
+    <div class="card-body mx-20">
+        <form method="post" enctype="multipart/form-data"></form>
+        <h5 class="card-title">{{object.name}}</h5>
+        <p class="card-text">{{object.description}}</p>
+<!--        {% if user.is_authenticated %}-->
+<!--            <a href="/categories/delete/{{object.pk}}" class="btn btn-danger position-center">Удалить</a>-->
+<!--        {% endif %}-->
+    </div>
+</div>
+{% endblock %}
