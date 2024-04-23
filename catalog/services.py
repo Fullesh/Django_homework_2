@@ -1,16 +1,16 @@
 from django.conf import settings
 from django.core.cache import cache
 
-from catalog.models import Product
+from catalog.models import Product, Category
 
 
 def get_category_from_cache():
     if not settings.CACHE_ENABLED:
-        return Product.objects.all()
+        return Category.objects.all()
     key = 'proudcts_list'
-    product = cache.get(key)
-    if product is not None:
-        return product
-    product = Product.objects.all()
-    cache.set(key, product)
-    return product
+    category = cache.get(key)
+    if category is not None:
+        return category
+    category = Category.objects.all()
+    cache.set(key, category)
+    return category
