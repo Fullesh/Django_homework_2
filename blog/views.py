@@ -63,9 +63,9 @@ class BlogRecordDeatilView(DetailView):
 
 
 class BlogRecordDeleteView(DeleteView):
-    model = BlogRecord
-    template_name = 'blog/blog_confirm_delete.html'
-    success_url = reverse_lazy('blog:list')
+        model = BlogRecord
+        template_name = 'blog/blog_confirm_delete.html'
+        success_url = reverse_lazy('blog:list')
 
 
 def toggle_published(request, pk):
