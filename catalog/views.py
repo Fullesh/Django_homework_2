@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -70,17 +71,17 @@ class ProductUpdateView(UpdateView, LoginRequiredMixin):
     template_name = 'catalog/product_form.html'
     form_class = ProductAddForm
     success_url = reverse_lazy('catalog:index')
-    # perms = ('catalog.edit_publication', 'catalog.edit_description', 'catalog.edit_categories')
+    perms = ('catalog.edit_publication', 'catalog.edit_description', 'catalog.edit_categories')
 
-    # def get_form_class(self):
-    #     if self.request.user.is_staff and self.request.user.has_perms(perm_list=self.perms) \
-    #             and not self.request.user.is_superuser:
-    #         return ProductAddForm
-    #     else:
-    #         if self.request.user != self.get_object().owner:
-    #             raise PermissionDenied
-    #         else:
-    #             return ProductAddForm
+    def get_form_class(self):
+        if self.request.user.is_staff or self.request.user.has_perms(perm_list=self.perms) \
+                and not self.request.user.is_superuser:
+            return ProductAddForm
+        else:
+            if self.request.user != self.get_object().owner:
+                raise PermissionDenied
+            else:
+                return ProductAddForm
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
