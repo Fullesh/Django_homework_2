@@ -11,6 +11,8 @@ class StyleFormMixin:
         for field_name, field in self.fields.items():
             if field_name != 'actual_version_indicator':
                 field.widget.attrs['class'] = 'form-control'
+            elif not isinstance(field.widget, forms.CheckboxInput):
+                field.widget.attrs['class'] = 'form-control'
             else:
                 field.widget.attrs['class'] = 'form-check-input'
 
@@ -18,7 +20,7 @@ class StyleFormMixin:
 class ProductAddForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ('updated_by', 'owner')
+        exclude = ('updated_by', 'owner', 'published')
 
     def clean_name(self):
         cleaned_data = self.cleaned_data.get('name')
@@ -41,3 +43,9 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = ('product', 'version_number', 'name_of_version', 'actual_version_indicator')
+
+
+class ProductManagerForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'published')

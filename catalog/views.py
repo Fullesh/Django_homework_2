@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
-from catalog.forms import ProductAddForm, VersionForm
+from catalog.forms import ProductAddForm, VersionForm, ProductManagerForm
 from catalog.models import Product, Version, Category
 from catalog.services import get_category_from_cache
 
@@ -76,7 +76,7 @@ class ProductUpdateView(UpdateView, LoginRequiredMixin):
     def get_form_class(self):
         if self.request.user.is_staff or self.request.user.has_perms(perm_list=self.perms) \
                 and not self.request.user.is_superuser:
-            return ProductAddForm
+            return ProductManagerForm
         else:
             if self.request.user != self.get_object().owner:
                 raise PermissionDenied
